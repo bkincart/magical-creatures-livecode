@@ -57,57 +57,7 @@ const getCreatures = () => {
 }
 
 //YOUR CODE BELOW
-app.get('/', (req, res) => {
-  res.redirect("/creatures")
-})
 
-app.get("/creatures", (req, res) => {
-  let creatures = getCreatures()
-  console.log(creatures);
-  res.render("index", { creatures: creatures })
-})
-
-app.get("/creatures/new", (req, res) => {
-  res.render("new")
-})
-
-app.get("/creatures/:name", (req, res) => {
-  // let creatureName = req.params.name
-  // let creatures = getCreatures()
-  // let myCreature = creatures.find(creature => {
-  //   return creatureName === creature.name
-  // })
-  // // let myCreature = creatures.find(creature => req.params.name === creature.name)
-  // res.render("show", { creature: myCreature })
-  let creatureName = req.params.name
-  let creatures = getCreatures()
-  let creature = creatures.find(creature => {
-    return creatureName === creature.name
-  })
-  // let creature = creatures.find(creature => req.params.name === creature.name)
-  // res.render("show", { creature: creature })
-  if(creature) {
-    res.render("show", { creature })
-  } else {
-    res.status(404).send("That creature has not been discovered yet!")
-  }
-})
-
-app.post("/creatures", (req, res) => {
-  let newCreature = req.body
-  let creatures = getCreatures()
-  // console.log('newCreature', newCreature);
-  // console.log('creatures', creatures);
-  creatures.push(newCreature)
-  fs.writeFileSync(creatureDataPath, JSON.stringify(creatures))
-  // res.render("index", { creatures: creatures }) -- WRONG
-  res.redirect("/creatures")
-})
-
-// catch 404 and forward to error handler
-app.use((req, res, next) => {
-  next(createError(404))
-})
 
 
 export default app
