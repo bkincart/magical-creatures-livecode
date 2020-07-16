@@ -1,0 +1,12 @@
+<h1>Welcome One and All to the Magical Creatures Website!</h1>
+<p>This is where we keep track of all of our amazing magical creatures.</p>
+
+<ul>
+  {{#each creatures}}
+  <li>
+    <a href="/creatures/{{this.name}}">
+      {{this.name}}
+    </a>
+  </li>
+  {{/each}}
+</ul>
